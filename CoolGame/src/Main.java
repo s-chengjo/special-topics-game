@@ -27,7 +27,6 @@ public class Main {
 		
 		System.out.println("Get ready " + name + ", you are about to begin (name of game) on " + difficulty + " level!");
 		//balh
-		System.out.println(" ");
 	}
 
 }
