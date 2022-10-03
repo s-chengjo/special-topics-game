@@ -1,10 +1,12 @@
 import java.util.*;
 
+import javax.swing.JFrame;
+
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Scanner sc = new Scanner(System.in);
+		/*Scanner sc = new Scanner(System.in);
 		System.out.println("Welcome player");
 		System.out.println("Please enter your name (20 character limit): ");
 		String name = sc.nextLine();
@@ -25,9 +27,21 @@ public class Main {
 			difficulty = sc.nextLine().toLowerCase();
 		}
 		
-		System.out.println("Get ready " + name + ", you are about to begin (name of game) on " + difficulty + " level!");
-		//balh
-		//blah
+		System.out.println("Get ready " + name + ", you are about to begin (name of game) on " + difficulty + " level!"); */
+		
+		
+		JFrame frame = new JFrame();
+		Gamepanel gamepanel = new Gamepanel();
+		
+		frame.add(gamepanel);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("Snake Game");
+		
+		frame.pack(); //Sets window size based on preferred sizes
+		frame.setVisible(true); //shows window
+		frame.setLocationRelativeTo(null); //Choose where the window opens, null means in the center of screen, default is at top left corner
+		
+		
 	}
 
 }
