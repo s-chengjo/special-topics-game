@@ -1,11 +1,13 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-public class Gamepanel extends JPanel implements Runnable {
+public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	private static final long serialVersionUID = 1L;
 	public static final int WIDTH = 500, HEIGHT = 500;
@@ -20,7 +22,10 @@ public class Gamepanel extends JPanel implements Runnable {
 	
 	public Gamepanel() {
 		
+		setFocusable(true);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		addKeyListener(this);
+		
 		snake = new ArrayList<BodyPart>();
 		
 		start();
@@ -49,11 +54,11 @@ public class Gamepanel extends JPanel implements Runnable {
 		}
 		ticks++;
 		
-		if (ticks > 250000) {
+		if (ticks > 500000) {
 			if(right) xCoor++;
 			if(left) xCoor--;
-			if(up) yCoor++;
-			if(down) yCoor--;
+			if(up) yCoor--;
+			if(down) yCoor++;
 			
 			ticks = 0;
 			
@@ -98,5 +103,46 @@ public class Gamepanel extends JPanel implements Runnable {
 			tick();
 			repaint();
 		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+	}
+
+	@Override
+	//movement, takes input and changes direction
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		int key = e.getKeyCode();
+		if (key == KeyEvent.VK_RIGHT && !left) {
+			right = true;
+			up = false;
+			down = false;
+		}
+		
+		if (key == KeyEvent.VK_LEFT && !right) {
+			left = true;
+			up = false;
+			down = false;
+		}
+		
+		if (key==KeyEvent.VK_UP && !down) {
+			up = true;
+			left = false;
+			right = false;
+		}
+		
+		if(key == KeyEvent.VK_DOWN && !up) {
+			down = true;
+			left = false;
+			right = false;
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
