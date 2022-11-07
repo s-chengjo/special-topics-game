@@ -23,7 +23,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private ArrayList<Apple> apples;
 	private Random r;
 	
-	private int xCoor = 10, yCoor = 10, size = 5;
+	private int xCoor = 10, yCoor = 10, size = 15;
 	private int ticks = 0;
 	
 	
@@ -64,7 +64,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		ticks++;
 		
-		if (ticks > 500000) {
+		if (ticks > 650000) {
 			if(right) xCoor++;
 			if(left) xCoor--;
 			if(up) yCoor--;
@@ -81,11 +81,33 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		if (apples.size() == 0) {
-			int xCoor = r.nextInt(49);
-			int yCoor = r.nextInt(49);
+			int xCoor = r.nextInt(WIDTH/10 - 1);
+			int yCoor = r.nextInt(HEIGHT/10 - 1);
 			
 			apple = new Apple(xCoor, yCoor, 10);
 			apples.add(apple);
+		}
+		
+		for (int i = 0; i < apples.size(); i++) {
+			if (xCoor == apples.get(i).getxCoor() && yCoor == apples.get(i).getyCoor()) {
+				size++;
+				apples.remove(i);
+				i++;
+			}
+		}
+		
+		for (int i = 0; i < snake.size(); i++) {
+			if (xCoor == snake.get(i).getxCoor() && yCoor == snake.get(i).getyCoor()) {
+				if (i != snake.size() - 1) {
+					System.out.println("Game Over");
+					stop();
+				}
+			}
+		}
+		
+		if (xCoor < 0 || xCoor > WIDTH/10 - 1 || yCoor < 0 || yCoor > HEIGHT/10 - 1) {
+			System.out.println("Game Over");
+			stop();
 		}
 	}
 	
@@ -93,7 +115,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 		
-		g.setColor(Color.WHITE);
+		g.setColor(Color.BLACK); //background color
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		g.setColor(Color.BLACK);
