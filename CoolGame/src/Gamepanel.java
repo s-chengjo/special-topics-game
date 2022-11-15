@@ -5,13 +5,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import javax.swing.JPanel;
 
 public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 500, HEIGHT = 500;
+	public static int WIDTH = 500, HEIGHT = 500;
 	private Thread thread;
 	private boolean running;
 	private boolean right = true, left = false, up = false, down = false;
@@ -23,12 +24,32 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private ArrayList<Apple> apples;
 	private Random r;
 	
-	private int xCoor = 10, yCoor = 10, size = 15;
+	private int xCoor = 10, yCoor = 10, size = 5;
 	private int ticks = 0;
 	
 	
 	
 	public Gamepanel() {
+		
+		/*Scanner sc = new Scanner(System.in);
+		System.out.println("What size screen would you like to play on? (s, m, l)");
+		while (WIDTH == 0) {
+			String size = sc.next();
+			if (size.equalsIgnoreCase("s"))
+			{
+				WIDTH = 300;
+				HEIGHT = 300;
+			} else if (size.equalsIgnoreCase("m"))
+			{
+				WIDTH = 500;
+				HEIGHT = 500;
+			} else if (size.equalsIgnoreCase("l"))
+			{
+				WIDTH = 750;
+				HEIGHT = 750;
+			}
+		}
+		*/
 		
 		setFocusable(true);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
