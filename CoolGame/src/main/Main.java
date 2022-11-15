@@ -46,3 +46,9 @@ public class Main {
 	}
 
 }
+/*
+Download Eclipse https://www.eclipse.org/downloads/
+Clone repo with Github
+Open in Eclipse
+Ctrl+F11 to run
+*/
