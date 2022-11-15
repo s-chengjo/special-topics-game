@@ -1,11 +1,12 @@
+package main;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class BodyPart {
+public class Apple {
 	
 	private int xCoor, yCoor, width, height;
 	
-	public BodyPart(int xCoor, int yCoor, int tileSize) {
+	public Apple(int xCoor, int yCoor, int tileSize) {
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
 		width = tileSize;
@@ -17,7 +18,7 @@ public class BodyPart {
 	}
 	
 	public void draw(Graphics g) {
-		g.setColor(Color.YELLOW);
+		g.setColor(Color.RED);
 		g.fillRect(xCoor * width, yCoor* height, width, height);
 	}
 	
@@ -36,5 +37,4 @@ public class BodyPart {
 	public void setyCoor(int yCoor) {
 		this.yCoor = yCoor;
 	}
-
 }
