@@ -62,7 +62,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		snake = new ArrayList<BodyPart>();
 		apples = new ArrayList<Apple>();
-		r = new Random();
+		appleRand = new Random();
+		
+		blocks = new ArrayList<Block>();
+		blockRand = new Random();
 		
 		start();
 	}
@@ -114,7 +117,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			apples.add(apple);
 		}
 		
-		//blocks:
+		
 		
 		for (int i = 0; i < apples.size(); i++) {
 			if (xCoor == apples.get(i).getxCoor() && yCoor == apples.get(i).getyCoor()) {
@@ -124,17 +127,35 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
+		//blocks:
+		if (blocks.size() == 0) {
+			int xCoor = blockRand.nextInt(WIDTH/10 - 1);
+			int yCoor = blockRand.nextInt(HEIGHT/10 - 1);
+				
+			block = new Block(xCoor, yCoor, 10);
+			blocks.add(block);
+		}
+		
+		for (int i = 0; i < blocks.size(); i++)
+		{
+			if (xCoor == blocks.get(i).getxCoor() && yCoor == blocks.get(i).getyCoor())
+			{
+				System.out.println("Game Over (hit wall)");
+				stop();
+			}
+		}
+		
 		for (int i = 0; i < snake.size(); i++) {
 			if (xCoor == snake.get(i).getxCoor() && yCoor == snake.get(i).getyCoor()) {
 				if (i != snake.size() - 1) {
-					System.out.println("Game Over");
+					System.out.println("Game Over (hit yourself)");
 					stop();
 				}
 			}
 		}
 		
 		if (xCoor < 0 || xCoor > WIDTH/10 - 1 || yCoor < 0 || yCoor > HEIGHT/10 - 1) {
-			System.out.println("Game Over");
+			System.out.println("Game Over (out of bounds)");
 			stop();
 		}
 	}
@@ -164,6 +185,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		for (int i = 0; i < apples.size(); i++) {
 			apples.get(i).draw(g);
+		}
+		
+		for (int i = 0; i < blocks.size(); i++) {
+			blocks.get(i).draw(g);
 		}
 	}
 	
