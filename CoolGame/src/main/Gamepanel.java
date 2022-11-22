@@ -23,7 +23,11 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	private Apple apple;
 	private ArrayList<Apple> apples;
-	private Random r;
+	private Random appleRand;
+	
+	private Block block;
+	private ArrayList<Block> blocks;
+	private Random blockRand;
 	
 	private int xCoor = 10, yCoor = 10, size = 5;
 	private int ticks = 0;
@@ -103,12 +107,14 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		if (apples.size() == 0) {
-			int xCoor = r.nextInt(WIDTH/10 - 1);
-			int yCoor = r.nextInt(HEIGHT/10 - 1);
+			int xCoor = appleRand.nextInt(WIDTH/10 - 1);
+			int yCoor = appleRand.nextInt(HEIGHT/10 - 1);
 			
 			apple = new Apple(xCoor, yCoor, 10);
 			apples.add(apple);
 		}
+		
+		//blocks:
 		
 		for (int i = 0; i < apples.size(); i++) {
 			if (xCoor == apples.get(i).getxCoor() && yCoor == apples.get(i).getyCoor()) {
