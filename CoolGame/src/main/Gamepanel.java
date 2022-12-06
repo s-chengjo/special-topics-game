@@ -37,6 +37,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private JLabel JLabel1;
 	private JFrame f;
 	
+	private ArrayList<Integer> Scores;
+	
 	
 	
 	
@@ -80,6 +82,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		f.add(p);
 		JLabel1 = new JLabel("nothing entered");
 		
+		Scores = new ArrayList<Integer>();
+		
 		
 		start();
 	}
@@ -91,7 +95,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	}
 	
 	public void restart() {
-		running = false;
+		stop();
 		this.xCoor = 10;
 		this.yCoor = 10;
 		this.size = 5;
@@ -102,6 +106,9 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	}
 	
 	public void stop() {
+		
+		//Exit
+		
 		/*running = false;
 		try {
 			thread.join();
@@ -110,6 +117,19 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}*/
 		
 		running = false;
+		Scores.add(size*100 - 500);
+		
+		int highscore = 0;
+		for (int i = 0; i < Scores.size(); i++) {
+			if (Scores.get(i) > highscore) {
+				highscore = Scores.get(i);
+			}
+		}
+		
+		System.out.println("You got " + Scores.get(Scores.size()-1) + " points!\nYour highscore is " + highscore + "!!!! WOWW");
+		if (highscore < 300) {
+			System.out.println("HAHAHAH JUST KIDDING YOU DIDNT EVEN GET 300 POINTS");
+		}
 		
 		
 	}
