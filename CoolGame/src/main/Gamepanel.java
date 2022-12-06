@@ -195,6 +195,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 	}
 	
+	//draw
+	
 	public void paint(Graphics g) {
 		
 		g.clearRect(0, 0, WIDTH, HEIGHT);
