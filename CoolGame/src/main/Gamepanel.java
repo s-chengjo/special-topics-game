@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Gamepanel extends JPanel implements Runnable, KeyListener {
@@ -31,6 +33,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	private int xCoor = 10, yCoor = 10, size = 5;
 	private int ticks = 0;
+	
+	private JLabel JLabel1;
+	private JFrame f;
+	
 	
 	
 	
@@ -67,6 +73,14 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		blocks = new ArrayList<Block>();
 		blockRand = new Random();
 		
+		JPanel p = new JPanel();
+	//	p.add(JLabel1);
+		f = new JFrame("text field");
+		f.setSize(100,100);
+		f.add(p);
+		JLabel1 = new JLabel("nothing entered");
+		
+		
 		start();
 	}
 	
@@ -85,7 +99,6 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		apples.clear();
 		blocks.clear();
 		ticks = 0;
-		
 	}
 	
 	public void stop() {
@@ -214,12 +227,12 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		if (running == false) {
-			g.drawString("Game Over, hit right-arrow-key to play again!", WIDTH/2, HEIGHT/2);
+			myPrintMethod(g);
 		}
 	}
 	
 	public static void myPrintMethod(Graphics g){
-	    g.drawString("myPrintMethod",20,40); 
+	    g.drawString("Game Over, hit right-arrow-key to play again!",WIDTH/2,HEIGHT/2); 
 	}
 	
 
