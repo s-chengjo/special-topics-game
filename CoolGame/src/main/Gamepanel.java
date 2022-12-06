@@ -76,13 +76,29 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		thread.start();
 	}
 	
-	public void stop() {
+	public void restart() {
 		running = false;
+		this.xCoor = 10;
+		this.yCoor = 10;
+		this.size = 5;
+		snake.clear();
+		apples.clear();
+		blocks.clear();
+		ticks = 0;
+		
+	}
+	
+	public void stop() {
+		/*running = false;
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}*/
+		
+		running = false;
+		
+		
 	}
 	
 	public void tick() {
@@ -109,12 +125,25 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
+		if (ticks > 6500000) //every 10 ticks
+		{
+			blocks.remove(blocks.size()-1);
+		}
+		
+		//Scrapped, ticks reset to 0 above, will leave for future use
+		
 		if (apples.size() == 0) {
 			int xCoor = appleRand.nextInt(WIDTH/10 - 1);
 			int yCoor = appleRand.nextInt(HEIGHT/10 - 1);
 			
 			apple = new Apple(xCoor, yCoor, 10);
 			apples.add(apple);
+			
+			int xCoorB = blockRand.nextInt(WIDTH/10 - 1);
+			int yCoorB = blockRand.nextInt(HEIGHT/10 - 1);
+				
+			block = new Block(xCoorB, yCoorB, 10);
+			blocks.add(block);
 		}
 		
 		
@@ -128,13 +157,6 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		//blocks:
-		if (blocks.size() == 0) {
-			int xCoor = blockRand.nextInt(WIDTH/10 - 1);
-			int yCoor = blockRand.nextInt(HEIGHT/10 - 1);
-				
-			block = new Block(xCoor, yCoor, 10);
-			blocks.add(block);
-		}
 		
 		for (int i = 0; i < blocks.size(); i++)
 		{
@@ -156,7 +178,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		if (xCoor < 0 || xCoor > WIDTH/10 - 1 || yCoor < 0 || yCoor > HEIGHT/10 - 1) {
 			System.out.println("Game Over (out of bounds)");
-			stop();
+			restart();
 		}
 	}
 	
@@ -190,6 +212,14 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		for (int i = 0; i < blocks.size(); i++) {
 			blocks.get(i).draw(g);
 		}
+		
+		if (running == false) {
+			g.drawString("Game Over, hit right-arrow-key to play again!", WIDTH/2, HEIGHT/2);
+		}
+	}
+	
+	public static void myPrintMethod(Graphics g){
+	    g.drawString("myPrintMethod",20,40); 
 	}
 	
 
@@ -234,6 +264,13 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			down = true;
 			left = false;
 			right = false;
+		}
+		
+		if (key == KeyEvent.VK_RIGHT && !left && running == false) {
+			right = true;
+			up = false;
+			down = false;
+			start();
 		}
 	}
 
