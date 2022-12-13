@@ -196,7 +196,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			if (xCoor == blocks.get(i).getxCoor() && yCoor == blocks.get(i).getyCoor())
 			{
 				System.out.println("Game Over (hit wall)");
-				stop();
+				restart();
 			}
 		}
 		
@@ -204,7 +204,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			if (xCoor == snake.get(i).getxCoor() && yCoor == snake.get(i).getyCoor()) {
 				if (i != snake.size() - 1) {
 					System.out.println("Game Over (hit yourself)");
-					stop();
+					restart();
 				}
 			}
 		}
