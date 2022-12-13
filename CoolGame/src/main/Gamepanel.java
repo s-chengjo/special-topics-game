@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,8 +35,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private int xCoor = 10, yCoor = 10, size = 5;
 	private int ticks = 0;
 	
-	private JLabel JLabel1;
 	private JFrame f;
+	private JLabel l;
+	private ImageIcon i;
+	private JPanel p;
 	
 	private ArrayList<Integer> Scores;
 	
@@ -75,14 +78,16 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		blocks = new ArrayList<Block>();
 		blockRand = new Random();
 		
-		JPanel p = new JPanel();
-	//	p.add(JLabel1);
-		f = new JFrame("text field");
-		f.setSize(100,100);
-		f.add(p);
-		JLabel1 = new JLabel("nothing entered");
 		
 		Scores = new ArrayList<Integer>();
+		
+		f = new JFrame("label");
+		i = new ImageIcon("C:/SpecTopics/Restart.png");
+		l = new JLabel(i);
+		p = new JPanel();
+		p.add(l);
+		f.add(p);
+		f.setSize(WIDTH, HEIGHT);
 		
 		
 		start();
@@ -103,6 +108,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		apples.clear();
 		blocks.clear();
 		ticks = 0;
+		f.setVisible(true);
 	}
 	
 	public void stop() {
@@ -130,6 +136,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		if (highscore < 300) {
 			System.out.println("HAHAHAH JUST KIDDING YOU DIDNT EVEN GET 300 POINTS");
 		}
+		
 		
 		
 	}
@@ -301,10 +308,11 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			right = false;
 		}
 		
-		if (key == KeyEvent.VK_RIGHT && !left && running == false) {
+		if (key == KeyEvent.VK_RIGHT && running == false) {
 			right = true;
 			up = false;
 			down = false;
+			f.setVisible(false);
 			start();
 		}
 	}
