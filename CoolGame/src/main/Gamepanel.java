@@ -316,6 +316,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			start();
 		}
 	}
+	
 
 	@Override
 	public void keyReleased(KeyEvent e) {
