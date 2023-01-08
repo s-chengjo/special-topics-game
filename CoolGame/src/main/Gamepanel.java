@@ -177,7 +177,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 	}
 	
-	
+	//f
 	public void tick() {
 		if (snake.size() == 0)
 		{
