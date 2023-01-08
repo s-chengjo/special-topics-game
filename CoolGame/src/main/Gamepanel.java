@@ -148,7 +148,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		} else if (highscore > 2000) {
 			System.out.println("You scored " + highscore + " points??? CONGRAGULATIONS");
 		} else if (highscore > 3000) {
-			//Display congragulations image (poyo)
+			//Display congragulations image (poyo!)
 		}
 			
 	}
