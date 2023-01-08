@@ -150,7 +150,31 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		} else if (highscore > 3000) {
 			//Display congragulations image (poyo!)
 		}
-			
+		
+		int totalScore = 0;
+		for (int i = 0; i < Scores.size(); i++) {
+			totalScore += Scores.get(i);
+		}
+		
+		System.out.println("\nYour average score was " + (totalScore / Scores.size()) + " points.");
+		
+		int lowestScore = Scores.get(0);
+		
+		for (int i = 1; i < Scores.size(); i++) {
+			if (Scores.get(i) < lowestScore) {
+				lowestScore = Scores.get(i);
+			}
+		}
+		
+		System.out.println("\nYour lowest score was " + lowestScore + " points.");
+		
+		double percentOfHS = (double) lowestScore/highscore * 100;
+		
+		if (percentOfHS == 1) {
+			System.out.println("We hope your single playthrough was fun and exciting!");
+		} else {
+			System.out.println("Your lowest score was only " + percentOfHS + "% of your highest score!");
+		}
 	}
 	
 	
