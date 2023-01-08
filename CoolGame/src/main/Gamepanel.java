@@ -100,7 +100,11 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	}
 	
 	public void restart() {
-		stop();
+		running = false;
+		System.out.println("You scored " + (size*100 - 500) + " points!");
+		Scores.add(size*100 - 500);
+		
+		
 		this.xCoor = 10;
 		this.yCoor = 10;
 		this.size = 5;
@@ -123,6 +127,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}*/
 		
 		running = false;
+		System.out.println("You scored " + (size*100 - 500) + " points!");
 		Scores.add(size*100 - 500);
 		
 		int highscore = 0;
@@ -132,14 +137,22 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
-		System.out.println("You got " + Scores.get(Scores.size()-1) + " points!\nYour highscore is " + highscore + "!!!! WOWW");
-		if (highscore < 300) {
-			System.out.println("HAHAHAH JUST KIDDING YOU DIDNT EVEN GET 300 POINTS");
+		System.out.println("GG player!");
+		System.out.println("\nHere are some of your statistics:");
+		if (highscore > 400) {
+			System.out.println("Your high score was a measly " + highscore + " points...");
+		} else if (highscore > 800) {
+			System.out.println("Your high score was " + highscore + " points. Not bad");
+		} else if (highscore > 1500) {
+			System.out.println("Your high score was a whopping " + highscore + " points! You ate a whole lot of apples!");
+		} else if (highscore > 2000) {
+			System.out.println("You scored " + highscore + " points??? CONGRAGULATIONS");
+		} else if (highscore > 3000) {
+			//Display congragulations image (poyo)
 		}
-		
-		
-		
+			
 	}
+	
 	
 	public void tick() {
 		if (snake.size() == 0)
@@ -314,6 +327,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			down = false;
 			f.setVisible(false);
 			start();
+		}
+		
+		if (key == KeyEvent.VK_LEFT && running == false) {
+			stop();
 		}
 	}
 	
