@@ -133,7 +133,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		System.out.println("You scored " + (size*100 - 500) + " points!");
 		Scores.add(size*100 - 500);
 		
-		int highscore = 0;
+		int highscore = 100;
 		for (int i = 0; i < Scores.size(); i++) {
 			if (Scores.get(i) > highscore) {
 				highscore = Scores.get(i);
