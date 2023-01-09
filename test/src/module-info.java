@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author aybb
- *
- */
-module test {
-}
