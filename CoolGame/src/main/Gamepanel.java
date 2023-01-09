@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	private static final long serialVersionUID = 1L;
-	public static int WIDTH = 500, HEIGHT = 500;
+	public static int WIDTH = 0, HEIGHT = 0;
 	private Thread thread;
 	private boolean running;
 	private boolean right = true, left = false, up = false, down = false;
@@ -47,7 +47,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	public Gamepanel() {
 		
-		/*Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		System.out.println("What size screen would you like to play on? (s, m, l)");
 		while (WIDTH == 0) {
 			String size = sc.next();
@@ -63,9 +63,12 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			{
 				WIDTH = 750;
 				HEIGHT = 750;
+			} else {
+			System.out.println("Invalid input, please enter either s, m, or l");
 			}
 		}
-		*/
+		
+		
 		
 		setFocusable(true);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -89,8 +92,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		f.add(p);
 		f.setSize(WIDTH, HEIGHT);
 		
+		//start();
 		
-		start();
 	}
 	//.
 	public void start() {
