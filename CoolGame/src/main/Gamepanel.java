@@ -24,6 +24,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private BodyPart b;
 	private ArrayList<BodyPart> snake;
 	
+	private BodyPart b2;
+	private ArrayList<BodyPart> snake2;
+	private boolean multiplayer;
+	
 	private Apple apple;
 	private ArrayList<Apple> apples;
 	private Random appleRand;
@@ -33,6 +37,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private Random blockRand;
 	
 	private int xCoor = 10, yCoor = 10, size = 5;
+	private int xCoor2 = 10, yCoor2 = 10, size2 = 5;
 	private int ticks = 0;
 	
 	private JFrame f;
@@ -68,6 +73,19 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
+		System.out.println("Single player or double? (single, double)");
+		String playerInput = sc.next();
+		if (playerInput.equals("double")) {
+			snake2 = new ArrayList<BodyPart>();
+		} 
+		while (!playerInput.equalsIgnoreCase("single") && !playerInput.equalsIgnoreCase("double")) {
+			if (playerInput.equals("double")) {
+				snake2 = new ArrayList<BodyPart>();
+			} 
+			System.out.println("Invalid input. Please enter either single or double");
+			playerInput = sc.next();
+		}
+		
 		
 		
 		setFocusable(true);
@@ -75,6 +93,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		addKeyListener(this);
 		
 		snake = new ArrayList<BodyPart>();
+		
 		apples = new ArrayList<Apple>();
 		appleRand = new Random();
 		
@@ -84,7 +103,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		Scores = new ArrayList<Integer>();
 		
-		f = new JFrame("label");
+		f = new JFrame("death image");
 		i = new ImageIcon("C:/SpecTopics/Restart.png");
 		l = new JLabel(i);
 		p = new JPanel();
@@ -133,14 +152,14 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		System.out.println("You scored " + (size*100 - 500) + " points!");
 		Scores.add(size*100 - 500);
 		
-		int highscore = 0;
+		int highscore = 100;
 		for (int i = 0; i < Scores.size(); i++) {
 			if (Scores.get(i) > highscore) {
 				highscore = Scores.get(i);
 			}
 		}
 		
-		System.out.println("GG player!");
+		System.out.println("Snake is dead now");
 		System.out.println("\nHere are some of your statistics:");
 		if (highscore > 400) {
 			System.out.println("Your high score was a measly " + highscore + " points...");
@@ -313,7 +332,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			repaint();
 		}
 	}
-	
+
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
@@ -361,11 +380,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 	}
 	
-	
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
 		
 	}
 }
