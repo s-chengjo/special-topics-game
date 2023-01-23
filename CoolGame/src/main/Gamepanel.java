@@ -313,7 +313,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			repaint();
 		}
 	}
-
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
@@ -361,10 +361,11 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 	}
 	
-
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 }
