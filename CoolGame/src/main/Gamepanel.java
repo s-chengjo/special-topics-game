@@ -20,6 +20,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private Thread thread;
 	private boolean running;
 	private boolean right = true, left = false, up = false, down = false;
+	private boolean right2 = true, left2 = false, up2 = false, down2 = false;
 	
 	private BodyPart b;
 	private ArrayList<BodyPart> snake;
@@ -37,7 +38,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private Random blockRand;
 	
 	private int xCoor = 10, yCoor = 10, size = 5;
-	private int xCoor2 = 10, yCoor2 = 10, size2 = 5;
+	private int xCoor2 = 10, yCoor2 = 150, size2 = 5;
 	private int ticks = 0;
 	
 	private JFrame f;
@@ -206,6 +207,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			b = new BodyPart(xCoor, yCoor, 10);
 			snake.add(b);
 		}
+		if (snake2 != null) {
+			b2 = new BodyPart(xCoor2, yCoor2, 10);
+			snake2.add(b2);
+		}
 		ticks++;
 		
 		if (ticks > 650000) {
@@ -213,6 +218,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			if(left) xCoor--;
 			if(up) yCoor--;
 			if(down) yCoor++;
+			if(right2)
 			
 			ticks = 0;
 			
