@@ -387,4 +387,4 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 	}
 }
-// nothing
+// nothingg
