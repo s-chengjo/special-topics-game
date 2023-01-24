@@ -218,15 +218,26 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			if(left) xCoor--;
 			if(up) yCoor--;
 			if(down) yCoor++;
-			if(right2)
+			if(right2) xCoor2++;
+			if(left2) xCoor2--;
+			if(up2) yCoor2--;
+			if(down2) yCoor2++;
 			
 			ticks = 0;
 			
 			b = new BodyPart(xCoor, yCoor, 10);
 			snake.add(b);
+			if (snake2 != null) {
+				b2 = new BodyPart(xCoor2, yCoor2, 10);
+				snake2.add(b2);
+			}
 			
 			if (snake.size() > size) {
 				snake.remove(0);
+			}
+			
+			if (snake2.size() > size) {
+				snake2.remove(0);
 			}
 		}
 		
@@ -281,7 +292,20 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
+		for (int i = 0; i < snake2.size(); i++) {
+			if (xCoor2 == snake.get(i).getxCoor() && yCoor2 == snake.get(i).getyCoor()) {
+				if (i != snake2.size() - 1) {
+					System.out.println("Game Over (hit yourself)");
+					restart();
+				}
+			}
+		}
+		
 		if (xCoor < 0 || xCoor > WIDTH/10 - 1 || yCoor < 0 || yCoor > HEIGHT/10 - 1) {
+			System.out.println("Game Over (out of bounds)");
+			restart();
+		}
+		if (xCoor2 < 0 || xCoor2 > WIDTH/10 - 1 || yCoor2 < 0 || yCoor2 > HEIGHT/10 - 1) {
 			System.out.println("Game Over (out of bounds)");
 			restart();
 		}
@@ -310,6 +334,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		for (int i = 0; i <snake.size(); i++)
 		{
 			snake.get(i).draw(g);
+		}
+		
+		for (int i = 0; i < snake2.size(); i++) {
+			snake2.get(i).draw(g);
 		}
 		
 		for (int i = 0; i < apples.size(); i++) {
@@ -383,6 +411,30 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		if (key == KeyEvent.VK_LEFT && running == false) {
 			stop();
+		}
+		
+		if (key == KeyEvent.VK_W && !down2) {
+			up2 = true;
+			right2 = false;
+			left2 = false;
+		}
+		
+		if (key == KeyEvent.VK_A && !right2) {
+			right2 = true;
+			up2 = false;
+			down2 = false;
+		}
+		
+		if (key == KeyEvent.VK_D && !left2) {
+			left2 = true;
+			up2 = false;
+			down2 = false;
+		}
+		
+		if (key == KeyEvent.VK_S && !up2) {
+			down2 = true;
+			left2 = false;
+			right2 = false;
 		}
 	}
 	
