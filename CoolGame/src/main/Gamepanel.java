@@ -38,7 +38,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private Random blockRand;
 	
 	private int xCoor = 10, yCoor = 10, size = 5;
-	private int xCoor2 = 10, yCoor2 = 150, size2 = 5;
+	private int xCoor2 = 10, yCoor2 = 20, size2 = 5;
 	private int ticks = 0;
 	
 	private JFrame f;
@@ -298,7 +298,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		if (snake2 != null) {
 			for (int i = 0; i < snake2.size(); i++) {
-				if (xCoor2 == snake.get(i).getxCoor() && yCoor2 == snake.get(i).getyCoor()) {
+				if (xCoor2 == snake2.get(i).getxCoor() && yCoor2 == snake2.get(i).getyCoor()) {
 					if (i != snake2.size() - 1) {
 						System.out.println("Game Over (hit yourself)");
 						restart();
