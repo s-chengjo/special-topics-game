@@ -227,18 +227,22 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			
 			b = new BodyPart(xCoor, yCoor, 10);
 			snake.add(b);
-			if (snake2 != null) {
-				b2 = new BodyPart(xCoor2, yCoor2, 10);
-				snake2.add(b2);
-			}
 			
 			if (snake.size() > size) {
 				snake.remove(0);
 			}
 			
-			if (snake2.size() > size) {
-				snake2.remove(0);
+			if (snake2 != null) {
+				b2 = new BodyPart(xCoor2, yCoor2, 10);
+				snake2.add(b2);
+				
+				if (snake2.size() > size) {
+					snake2.remove(0);
+				}
 			}
+			
+			
+			
 		}
 		
 		if (ticks > 6500000) //every 10 ticks
@@ -292,11 +296,13 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
-		for (int i = 0; i < snake2.size(); i++) {
-			if (xCoor2 == snake.get(i).getxCoor() && yCoor2 == snake.get(i).getyCoor()) {
-				if (i != snake2.size() - 1) {
-					System.out.println("Game Over (hit yourself)");
-					restart();
+		if (snake2 != null) {
+			for (int i = 0; i < snake2.size(); i++) {
+				if (xCoor2 == snake.get(i).getxCoor() && yCoor2 == snake.get(i).getyCoor()) {
+					if (i != snake2.size() - 1) {
+						System.out.println("Game Over (hit yourself)");
+						restart();
+					}
 				}
 			}
 		}
@@ -305,13 +311,14 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			System.out.println("Game Over (out of bounds)");
 			restart();
 		}
-		if (xCoor2 < 0 || xCoor2 > WIDTH/10 - 1 || yCoor2 < 0 || yCoor2 > HEIGHT/10 - 1) {
-			System.out.println("Game Over (out of bounds)");
-			restart();
+		if (snake2 != null) {
+			if (xCoor2 < 0 || xCoor2 > WIDTH/10 - 1 || yCoor2 < 0 || yCoor2 > HEIGHT/10 - 1) {
+				System.out.println("Game Over (out of bounds)");
+				restart();
+			}
 		}
 	}
-	
-	//dra
+	//draw
 	
 	public void paint(Graphics g) {
 		
@@ -336,21 +343,23 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			snake.get(i).draw(g);
 		}
 		
-		for (int i = 0; i < snake2.size(); i++) {
-			snake2.get(i).draw(g);
+		if (snake2 != null) {
+			for (int i = 0; i < snake2.size(); i++) {
+				snake2.get(i).draw(g);
+			}
 		}
 		
 		for (int i = 0; i < apples.size(); i++) {
 			apples.get(i).draw(g);
-		}
+		} 
 		
 		for (int i = 0; i < blocks.size(); i++) {
 			blocks.get(i).draw(g);
 		}
 		
-		if (running == false) {
+		/*if (running == false) {
 			myPrintMethod(g);
-		}
+		}*/
 	}
 	
 	public static void myPrintMethod(Graphics g){
