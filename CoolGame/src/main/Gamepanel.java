@@ -25,8 +25,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private BodyPart b;
 	private ArrayList<BodyPart> snake;
 	
-	private BodyPart b2;
-	private ArrayList<BodyPart> snake2;
+	private EvilBodyPart b2;
+	private ArrayList<EvilBodyPart> snake2;
 	private boolean multiplayer;
 	
 	private Apple apple;
@@ -77,11 +77,11 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		System.out.println("Single player or double? (single, double)");
 		String playerInput = sc.next();
 		if (playerInput.equals("double")) {
-			snake2 = new ArrayList<BodyPart>();
+			snake2 = new ArrayList<EvilBodyPart>();
 		} 
 		while (!playerInput.equalsIgnoreCase("single") && !playerInput.equalsIgnoreCase("double")) {
 			if (playerInput.equals("double")) {
-				snake2 = new ArrayList<BodyPart>();
+				snake2 = new ArrayList<EvilBodyPart>();
 			} 
 			System.out.println("Invalid input. Please enter either single or double");
 			playerInput = sc.next();
@@ -208,7 +208,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			snake.add(b);
 		}
 		if (snake2 != null) {
-			b2 = new BodyPart(xCoor2, yCoor2, 10);
+			b2 = new EvilBodyPart(xCoor2, yCoor2, 10);
 			snake2.add(b2);
 		}
 		ticks++;
@@ -233,7 +233,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 			
 			if (snake2 != null) {
-				b2 = new BodyPart(xCoor2, yCoor2, 10);
+				b2 = new EvilBodyPart(xCoor2, yCoor2, 10);
 				snake2.add(b2);
 				
 				if (snake2.size() > size) {
