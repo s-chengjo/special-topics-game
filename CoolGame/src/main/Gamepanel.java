@@ -311,7 +311,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			System.out.println("Game Over (out of bounds)");
 			restart();
 		}
-		if (snake2 != null) {
+		if (snake2 != null) { 
 			if (xCoor2 < 0 || xCoor2 > WIDTH/10 - 1 || yCoor2 < 0 || yCoor2 > HEIGHT/10 - 1) {
 				System.out.println("Game Over (out of bounds)");
 				restart();
