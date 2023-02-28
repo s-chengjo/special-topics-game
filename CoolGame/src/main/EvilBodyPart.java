@@ -19,7 +19,7 @@ public class EvilBodyPart {
 	}
 	
 	public void draw(Graphics g) {
-		g.setColor(Color.PINK);
+		g.setColor(Color.RED);
 		g.fillRect(xCoor * width, yCoor* height, width, height);
 	}
 	
