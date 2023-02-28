@@ -1,5 +1,8 @@
 package main;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class EvilBodyPart {
 	
 	private int xCoor, yCoor, width, height;
@@ -13,6 +16,15 @@ public class EvilBodyPart {
 	
 	public void tick() {
 		
+	}
+	
+	public void draw(Graphics g) {
+		g.setColor(Color.PINK);
+		g.fct(xCoor * width, yCoor* height, width, height);
+	}
+	
+	public int getxCoor() {
+		return xCoor;
 	}
 
 }
