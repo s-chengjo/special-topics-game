@@ -298,6 +298,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
+		
 		for (int i = 0; i < snake.size(); i++) {
 			if (xCoor == snake.get(i).getxCoor() && yCoor == snake.get(i).getyCoor()) {
 				if (i != snake.size() - 1) {
