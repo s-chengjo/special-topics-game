@@ -74,6 +74,12 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
+		setFocusable(true);
+		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		addKeyListener(this);
+		
+		snake = new ArrayList<BodyPart>();
+		
 		System.out.println("Single player or double? (single, double)");
 		String playerInput = sc.next();
 		if (playerInput.equals("double")) {
@@ -86,14 +92,6 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			System.out.println("Invalid input. Please enter either single or double");
 			playerInput = sc.next();
 		}
-		
-		
-		
-		setFocusable(true);
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		addKeyListener(this);
-		
-		snake = new ArrayList<BodyPart>();
 		
 		apples = new ArrayList<Apple>();
 		appleRand = new Random();
@@ -208,8 +206,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			snake.add(b);
 		}
 		if (snake2 != null) {
-			b2 = new EvilBodyPart(xCoor2, yCoor2, 10);
-			snake2.add(b2);
+			if (snake2.size() == 0) {
+				b2 = new EvilBodyPart(xCoor2, yCoor2, 10);
+				snake2.add(b2);
+			}
 		}
 		ticks++;
 		
@@ -282,21 +282,32 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		{
 			if (xCoor == blocks.get(i).getxCoor() && yCoor == blocks.get(i).getyCoor())
 			{
-				System.out.println("Game Over (hit wall)");
+				System.out.println("Game Over (snake hit wall)");
 				restart();
+			}
+		}
+		
+		if (snake2 != null) {
+			for (int i = 0; i < blocks.size(); i++)
+			{
+				if (xCoor2 == blocks.get(i).getxCoor() && yCoor2 == blocks.get(i).getyCoor())
+				{
+					System.out.println("Game Over (snake2 hit wall)");
+					restart();
+				}
 			}
 		}
 		
 		for (int i = 0; i < snake.size(); i++) {
 			if (xCoor == snake.get(i).getxCoor() && yCoor == snake.get(i).getyCoor()) {
 				if (i != snake.size() - 1) {
-					System.out.println("Game Over (hit yourself)");
+					System.out.println("Game Over (snake hit yourself)");
 					restart();
 				}
 			}
 		}
 		
-		/*if (snake2 != null) {
+		if (snake2 != null) {
 			for (int i = 0; i < snake2.size(); i++) {
 				if (xCoor2 == snake2.get(i).getxCoor() && yCoor2 == snake2.get(i).getyCoor()) {
 					if (i != snake2.size() - 1) {
@@ -305,15 +316,15 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 					}
 				}
 			}
-		}*/
+		}
 		
 		if (xCoor < 0 || xCoor > WIDTH/10 - 1 || yCoor < 0 || yCoor > HEIGHT/10 - 1) {
-			System.out.println("Game Over (out of bounds)");
+			System.out.println("Game Over (snake out of bounds)");
 			restart();
 		}
 		if (snake2 != null) { 
 			if (xCoor2 < 0 || xCoor2 > WIDTH/10 - 1 || yCoor2 < 0 || yCoor2 > HEIGHT/10 - 1) {
-				System.out.println("Game Over (out of bounds)");
+				System.out.println("Game Over (snake2 out of bounds)");
 				restart();
 			}
 		}
@@ -360,10 +371,6 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		/*if (running == false) {
 			myPrintMethod(g);
 		}*/
-	}
-	
-	public static void myPrintMethod(Graphics g){
-	    g.drawString("Game Over, hit right-arrow-key to play again!",WIDTH/2,HEIGHT/2); 
 	}
 	
 
