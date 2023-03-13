@@ -246,7 +246,15 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	public void stop2() {
 		running = false; 
-		
+		int wins = 0;
+		for (int i = 0; i < Scores.size(); i++)
+		{
+			if (Scores.get(i) >= winThreshold*100)
+			{
+				wins++;
+			}
+		}
+		System.out.println("Kirpy won " + wins + " times and lost " + (Scores.size() - wins) + " times!");
 	}
 	
 	//ffwa
