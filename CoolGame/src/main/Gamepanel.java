@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -27,7 +28,6 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	private BodyPart b2;
 	private ArrayList<BodyPart> snake2;
-	private boolean multiplayer;
 	
 	private Apple apple;
 	private ArrayList<Apple> apples;
@@ -51,6 +51,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private JPanel p;
 	
 	private ArrayList<Integer> Scores;
+	private int winThreshold;
 	
 	
 	
@@ -95,6 +96,29 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			} 
 			System.out.println("Invalid input. Please enter either single or double");
 			playerInput = sc.next();
+		}
+		
+		if (snake2 != null) {
+			do {
+				int num = 0;
+				boolean inputOk = false;
+			    do{
+			    	System.out.println("What number of apples would you like to set for Kirpy to eat in order to beat Schmirpy? (Rec: 15)");
+			        try {
+			            num = sc.nextInt();
+			            inputOk = true;
+			        } catch (InputMismatchException  e) {
+			            System.out.println("please enter a number (1, 2, 3)");
+			            sc.nextLine(); // to reset the scanner
+			        }
+			    }while (!inputOk);
+				
+				if (num > 0 && num < 150) {
+					winThreshold = num;
+				} else {
+					System.out.println("Invalid input, please select a number between 0 and 150");
+				}
+			} while(winThreshold == 0);
 		}
 		
 		apples = new ArrayList<Apple>();
@@ -218,6 +242,11 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		} else {
 			System.out.println("Your lowest score was only " + percentOfHS + "% of your highest score!");
 		}
+	}
+	
+	public void stop2() {
+		running = false; 
+		
 	}
 	
 	//ffwa
@@ -511,9 +540,14 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			start();
 		}
 		
-		if (key == KeyEvent.VK_LEFT && running == false) {
+		if (key == KeyEvent.VK_LEFT && running == false && snake2 == null) {
 			stop();
 		}
+		
+		if (key == KeyEvent.VK_LEFT && running == false && snake2 != null) {
+			stop2();
+		}
+		
 		
 		if (key == KeyEvent.VK_W && !down2) {
 			up2 = true;
