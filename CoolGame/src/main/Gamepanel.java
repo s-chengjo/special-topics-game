@@ -54,7 +54,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	
 	
-	//
+	//.
 	public Gamepanel() {
 		
 		Scanner sc = new Scanner(System.in);
