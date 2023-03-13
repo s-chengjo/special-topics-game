@@ -25,8 +25,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private BodyPart b;
 	private ArrayList<BodyPart> snake;
 	
-	private EvilBodyPart b2;
-	private ArrayList<EvilBodyPart> snake2;
+	private BodyPart b2;
+	private ArrayList<BodyPart> snake2;
 	private boolean multiplayer;
 	
 	private Apple apple;
@@ -40,6 +40,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private int xCoor = 10, yCoor = 10, size = 5;
 	private int xCoor2 = 10, yCoor2 = 20;
 	private int ticks = 0;
+	
+	
+	private ArrayList<EvilBodyPart> CannonBall;
+	private EvilBodyPart cannonBall;
 	
 	private JFrame f;
 	private JLabel l;
@@ -83,11 +87,11 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		System.out.println("Single player or double? (single, double)");
 		String playerInput = sc.next();
 		if (playerInput.equals("double")) {
-			snake2 = new ArrayList<EvilBodyPart>();
+			snake2 = new ArrayList<BodyPart>();
 		} 
 		while (!playerInput.equalsIgnoreCase("single") && !playerInput.equalsIgnoreCase("double")) {
 			if (playerInput.equals("double")) {
-				snake2 = new ArrayList<EvilBodyPart>();
+				snake2 = new ArrayList<BodyPart>();
 			} 
 			System.out.println("Invalid input. Please enter either single or double");
 			playerInput = sc.next();
@@ -101,6 +105,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		
 		Scores = new ArrayList<Integer>();
+		
+		CannonBall = new ArrayList<EvilBodyPart>();
 		
 		f = new JFrame("death image");
 		i = new ImageIcon("C:/SpecTopics/Restart.png");
@@ -125,10 +131,23 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		System.out.println("You scored " + (size*100 - 500) + " points!");
 		Scores.add(size*100 - 500);
 		
+		System.out.println("Hit right-arrow-key to continue\nHit left-arrow-key to see your statistics");
+		
 		
 		this.xCoor = 10;
 		this.yCoor = 10;
 		this.size = 5;
+		
+		left = false;
+		right = true;
+		down = false;
+		up = false;
+		
+		left2= false;
+		right2 = true;
+		down2 = false;
+		up2 = false;
+		
 		snake.clear();
 		apples.clear();
 		blocks.clear();
@@ -160,7 +179,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		System.out.println("Snake is dead now");
 		System.out.println("\nHere are some of your statistics:");
-		if (highscore > 400) {
+		if (highscore > 0) {
 			System.out.println("Your high score was a measly " + highscore + " points...");
 		} else if (highscore > 800) {
 			System.out.println("Your high score was " + highscore + " points. Not bad");
@@ -186,8 +205,11 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 				lowestScore = Scores.get(i);
 			}
 		}
-		
-		System.out.println("\nYour lowest score was " + lowestScore + " points.");
+		if (lowestScore == 0) {
+			System.out.println("Your lowest score was the lowest it goes, 0 points");
+		} else {
+			System.out.println("\nYour lowest score was " + lowestScore + " points.");
+		}
 		
 		double percentOfHS = (double) lowestScore/highscore * 100;
 		
@@ -207,13 +229,33 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		if (snake2 != null) {
 			if (snake2.size() == 0) {
-				b2 = new EvilBodyPart(xCoor2, yCoor2, 10);
+				b2 = new BodyPart(xCoor2, yCoor2, 10);
 				snake2.add(b2);
 			}
 		}
 		ticks++;
 		
-		if (ticks > 650000) {
+		if (CannonBall.size() > 0 == true && ticks % 225000 == 0) {
+			for (int i = 0; i < CannonBall.size(); i++) {
+				String direction = CannonBall.get(i).getDirection();
+				switch (direction) {
+				case "right":
+					CannonBall.get(i).moveRight();
+					break;
+				case "left":
+					CannonBall.get(i).moveLeft();
+					break;
+				case "up":
+					CannonBall.get(i).moveUp();
+					break;
+				case "down":
+					CannonBall.get(i).moveDown();
+					break;
+				}
+			}
+		}
+		
+		if (ticks % 650000 == 0) {
 			if(right) xCoor++;
 			if(left) xCoor--;
 			if(up) yCoor--;
@@ -223,7 +265,6 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			if(up2) yCoor2--;
 			if(down2) yCoor2++;
 			
-			ticks = 0;
 			
 			b = new BodyPart(xCoor, yCoor, 10);
 			snake.add(b);
@@ -233,7 +274,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 			
 			if (snake2 != null) {
-				b2 = new EvilBodyPart(xCoor2, yCoor2, 10);
+				b2 = new BodyPart(xCoor2, yCoor2, 10);
 				snake2.add(b2);
 				
 				if (snake2.size() > size) {
@@ -245,9 +286,25 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			
 		}
 		
-		if (ticks > 6500000) //every 10 ticks
+		if (snake2 != null) {
+			if (ticks % 6500000 == 0) { //every 10 frames
+				System.out.println("tenth tick");
+				if (right2 == true) {
+					cannonBall = new EvilBodyPart(xCoor2, yCoor2, 10, "right");
+				} else if (left2 == true) {
+					cannonBall = new EvilBodyPart(xCoor2, yCoor2, 10, "left");
+				} else if (up2 == true) {
+					cannonBall = new EvilBodyPart(xCoor2, yCoor2, 10, "up");
+				} else {
+					cannonBall = new EvilBodyPart(xCoor2, yCoor2, 10, "down");
+				}
+				CannonBall.add(cannonBall);
+			}
+		}
+		
+		if (blocks.size() > 15) //Max 15 blocks at a time
 		{
-			blocks.remove(blocks.size()-1);
+			blocks.remove(0);
 		}
 		
 		//Scrapped, ticks reset to 0 above, will leave for future use
@@ -329,6 +386,30 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 				restart();
 			}
 		}
+		
+		if (snake2 != null) {
+			for (int i = 0; i < snake.size(); i++) {
+				if (xCoor2 == snake.get(i).getxCoor() && yCoor2 == snake.get(i).getyCoor())
+				{
+					System.out.println("Evil kirpy caught kirpy");
+					restart();
+				}
+			}
+		}
+		
+		if (snake2 != null) {
+			for (int i = 0; i < CannonBall.size(); i++) {
+				int x = CannonBall.get(i).getxCoor();
+				int y = CannonBall.get(i).getyCoor();
+				
+				for (int j = 0; j < snake.size(); j++) {
+					if (snake.get(i).getxCoor() == x && snake.get(i).getyCoor() == y) {
+						System.out.println("Game over, schmirpy shot and killed kirpy");
+						restart();
+					}
+				}
+			}
+		}
 	}
 	//draw
 	
@@ -359,7 +440,11 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			for (int i = 0; i < snake2.size(); i++) {
 				snake2.get(i).draw(g);
 			}
+			for (int i = 0; i < CannonBall.size(); i++) {
+				CannonBall.get(i).draw(g);
+			}
 		}
+		
 		
 		for (int i = 0; i < apples.size(); i++) {
 			apples.get(i).draw(g);
@@ -437,13 +522,13 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		if (key == KeyEvent.VK_A && !right2) {
-			right2 = true;
+			left2 = true;
 			up2 = false;
 			down2 = false;
 		}
 		
 		if (key == KeyEvent.VK_D && !left2) {
-			left2 = true;
+			right2 = true;
 			up2 = false;
 			down2 = false;
 		}
