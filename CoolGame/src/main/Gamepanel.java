@@ -155,7 +155,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		System.out.println("You scored " + (size*100 - 500) + " points!");
 		Scores.add(size*100 - 500);
 		
-		System.out.println("Hit right-arrow-key to continue\nHit left-arrow-key to see your statistics");
+		System.out.println("Hit right-arrow-key to continue\nHit left-arrow-key to see your statistics\nHit up-arrow-key to see your high score");
 		
 		
 		this.xCoor = 10;
@@ -194,7 +194,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		System.out.println("You scored " + (size*100 - 500) + " points!");
 		Scores.add(size*100 - 500);
 		
-		int highscore = 100;
+		int highscore = 0;
 		for (int i = 0; i < Scores.size(); i++) {
 			if (Scores.get(i) > highscore) {
 				highscore = Scores.get(i);
@@ -204,7 +204,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		System.out.println("Snake is dead now");
 		System.out.println("\nHere are some of your statistics:");
 		if (highscore > 0) {
-			System.out.println("Your high score was a measly " + highscore + " points...");
+			System.out.println("Your high score was a measely " + highscore + " points...");
 		} else if (highscore > 800) {
 			System.out.println("Your high score was " + highscore + " points. Not bad");
 		} else if (highscore > 1500) {
@@ -220,7 +220,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			totalScore += Scores.get(i);
 		}
 		
-		System.out.println("\nYour average score was " + (totalScore / Scores.size()) + " points.");
+		System.out.println("\nYour average score was " + (totalScore / Scores.size()) + " points.\n");
 		
 		int lowestScore = Scores.get(0);
 		
@@ -545,6 +545,17 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			down = false;
 			f.setVisible(false);
 			start();
+		}
+		
+		if (key == KeyEvent.VK_UP && running == false) {
+			f.setVisible(false);
+			int highscore = 0;
+			for (int i = 0; i < Scores.size(); i++) {
+				if (Scores.get(i) > highscore) {
+					highscore = Scores.get(i);
+				}
+			}
+			System.out.println("Your high score is " + highscore + " points!");
 		}
 		
 		if (key == KeyEvent.VK_LEFT && running == false && snake2 == null) {
