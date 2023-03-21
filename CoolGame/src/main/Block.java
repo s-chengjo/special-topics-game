@@ -18,7 +18,7 @@ public class Block {
 	}
 	
 	public void draw(Graphics g) {
-		g.setColor(Color.WHITE);
+		g.setColor(Color.MAGENTA);
 		g.fillRect(xCoor * width, yCoor* height, width, height);
 	}
 	
