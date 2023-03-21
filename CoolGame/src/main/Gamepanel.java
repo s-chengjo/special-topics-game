@@ -72,8 +72,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 				HEIGHT = 500;
 			} else if (size.equalsIgnoreCase("l"))
 			{
-				WIDTH = 750;
-				HEIGHT = 750;
+				WIDTH = 700;
+				HEIGHT = 650;
 			} else {
 			System.out.println("Invalid input, please enter either s, m, or l");
 			}
