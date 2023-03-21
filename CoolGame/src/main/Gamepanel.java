@@ -457,7 +457,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		g.setColor(Color.BLACK); //background color
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		g.setColor(Color.BLACK);
+		g.setColor(Color.BLUE);
 		for (int i = 0; i < WIDTH/10; i++) //Draws lines going up (trying to make a grid) the 10 is by how much you want to increment the lines (spacing)
 		{
 			g.drawLine(i*10, 0, i*10, HEIGHT);
