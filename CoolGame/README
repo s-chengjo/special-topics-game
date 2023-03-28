@@ -1,0 +1,18 @@
+Snake game
+
+Instructions:
+
+Singleplayer:
+1. Run Main.java and the console should first ask what size screen you would like to play on. Choose either (s, m, or l) small medium or large.
+2. It will ask whether you would like to play single or double player, pick single.
+3. Use the arrow keys to move up, down, left, and right. You start as a pink snake moving to the right.
+4. Collect the red apples but avoid the purple blocks (they will kill you!)
+5. When you die either hit right arrow key to keep playing or left arrow key to end your run and see your stats like your high score.
+
+Doubleplayer:
+1. Run Main.java and the console should first ask what size screen you would like to play on. Choose either (s, m, or l) small medium or large.
+2. It will ask whether you would like to play single or double player, pick double
+3. You will be asked how many apples snake 1 needs to get in order to win. 
+4. Snake 1 uses arrow keys to move, snake 2 (evil snake) uses WASD. 
+5. Snake 2 will shoot green cannon balls and either shooting or hitting snake 1 will kill snake 1 giving snake 2 a win!
+6. After a game ends, choose either right arrow key to keep playing or left arrow key to see statistics like how many times snake 1 won!
