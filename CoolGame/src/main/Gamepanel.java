@@ -467,10 +467,19 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 		
+		if (snake2!=null) {
+			g.setColor(Color.DARK_GRAY);
+		} else {
 		g.setColor(Color.BLACK); //background color
+		}
+		
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		g.setColor(Color.BLUE);
+		if (snake2!=null) {
+			g.setColor(Color.YELLOW);
+		} else {
+			g.setColor(Color.BLUE);	
+		}
 		for (int i = 0; i < WIDTH/10; i++) //Draws lines going up (trying to make a grid) the 10 is by how much you want to increment the lines (spacing)
 		{
 			g.drawLine(i*10, 0, i*10, HEIGHT);
@@ -488,7 +497,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		if (snake2 != null) {
 			for (int i = 0; i < snake2.size(); i++) {
-				snake2.get(i).draw(g);
+				snake2.get(i).drawEvil(g);
 			}
 			for (int i = 0; i < CannonBall.size(); i++) {
 				CannonBall.get(i).draw(g);

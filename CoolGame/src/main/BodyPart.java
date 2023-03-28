@@ -22,6 +22,11 @@ public class BodyPart {
 		g.fillRect(xCoor * width, yCoor* height, width, height);
 	}
 	
+	public void drawEvil(Graphics g) {
+		g.setColor(Color.ORANGE);
+		g.fillRect(xCoor * width, yCoor* height, width, height);
+	}
+	
 	public int getxCoor() {
 		return xCoor;
 	}
