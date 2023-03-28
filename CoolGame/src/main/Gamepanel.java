@@ -52,6 +52,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	private ArrayList<Integer> Scores;
 	private int winThreshold;
+	private boolean invulnerable;
 	
 	
 	
@@ -84,6 +85,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		addKeyListener(this);
 		
 		snake = new ArrayList<BodyPart>();
+		invulnerable = false;
 		
 		System.out.println("Single player or double? (single, double)");
 		String playerInput = sc.next();
@@ -338,6 +340,10 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
+		if (invulnerable == true && ticks > 6500000) {
+			invulnerable = false;
+		}
+		
 		if (blocks.size() > 15) //Max 15 blocks at a time
 		{
 			blocks.remove(0);
@@ -366,6 +372,11 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 				size++;
 				apples.remove(i);
 				i++;
+				
+				if (snake2 != null) {
+					invulnerable = true;
+					ticks = 0;
+				}
 			}
 		}
 		
@@ -422,7 +433,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 				restart();
 			}
 		}
-		
+		if (invulnerable == false)
+		{
 		if (snake2 != null) {
 			for (int i = 0; i < snake.size(); i++) {
 				if (xCoor2 == snake.get(i).getxCoor() && yCoor2 == snake.get(i).getyCoor())
@@ -446,6 +458,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 				}
 			}
 		}
+	}
 	}
 	//draw
 	
