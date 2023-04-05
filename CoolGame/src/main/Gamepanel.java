@@ -54,6 +54,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private int winThreshold;
 	private boolean invulnerable;
 	
+	private int totalTickrate;
+	
 	
 	
 	//.
@@ -86,6 +88,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		snake = new ArrayList<BodyPart>();
 		invulnerable = false;
+		
+		totalTickrate = 650000;
 		
 		System.out.println("Single player or double? (single, double)");
 		String playerInput = sc.next();
@@ -121,6 +125,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 					System.out.println("Invalid input, please select a number between 0 and 150");
 				}
 			} while(winThreshold == 0);
+			totalTickrate = 450000;
 		}
 		
 		apples = new ArrayList<Apple>();
@@ -275,7 +280,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		ticks++;
 		
-		if (CannonBall.size() > 0 == true && ticks % 225000 == 0) {
+		if (CannonBall.size() > 0 == true && ticks % (totalTickrate*0.35) == 0) {
 			for (int i = 0; i < CannonBall.size(); i++) {
 				String direction = CannonBall.get(i).getDirection();
 				switch (direction) {
@@ -295,7 +300,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
-		if (ticks % 650000 == 0) {
+		if (ticks % totalTickrate == 0) {
 			if(right) xCoor++;
 			if(left) xCoor--;
 			if(up) yCoor--;
@@ -327,7 +332,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		if (snake2 != null) {
-			if (ticks % 6500000 == 0) { //every 10 frames
+			if (ticks % totalTickrate*10 == 0) { //every 10 frames
 				if (right2 == true) {
 					cannonBall = new EvilBodyPart(xCoor2, yCoor2, 10, "right");
 				} else if (left2 == true) {
@@ -341,7 +346,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			}
 		}
 		
-		if (invulnerable == true && ticks > 6500000) {
+		if (invulnerable == true && ticks > totalTickrate*10) {
 			invulnerable = false;
 		}
 		
