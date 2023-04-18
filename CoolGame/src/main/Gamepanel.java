@@ -1,5 +1,5 @@
 package main;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import javax.imageio.ImageIO;
 
 public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
@@ -55,6 +57,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private boolean invulnerable;
 	
 	private int totalTickrate;
+	private Image kirby;
 	
 	
 	
@@ -88,6 +91,14 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		snake = new ArrayList<BodyPart>();
 		invulnerable = false;
+		
+		try {
+		kirby = ImageIO.read(getClass().getResourceAsStream("/resources/sprite_00.png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		totalTickrate = 650000;
 		
@@ -140,7 +151,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		CannonBall = new ArrayList<EvilBodyPart>();
 		
 		f = new JFrame("death image");
-		i = new ImageIcon("C:/SpecTopics/Restart.png");
+		i = new ImageIcon("sprite_00.png");
 		l = new JLabel(i);
 		p = new JPanel();
 		p.add(l);
@@ -497,7 +508,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		for (int i = 0; i <snake.size(); i++)
 		{
-			snake.get(i).draw(g);
+			snake.get(i).draw(g, kirby);
 		}
 		
 		if (snake2 != null) {
@@ -521,6 +532,13 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		/*if (running == false) {
 			myPrintMethod(g);
 		}*/
+		
+		if (running == false) {
+			g.clearRect(0, 0, WIDTH, HEIGHT);
+			g.drawImage(kirby, 0, 0, b);
+		}
+		
+		
 	}
 	
 

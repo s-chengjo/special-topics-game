@@ -1,8 +1,8 @@
 package main;
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
+import java.awt.image.ImageObserver;
 
-public class BodyPart {
+public class BodyPart implements ImageObserver{
 	
 	private int xCoor, yCoor, width, height;
 	
@@ -11,6 +11,8 @@ public class BodyPart {
 		this.yCoor = yCoor;
 		width = tileSize;
 		height = tileSize;
+		
+		
 	}
 	
 	public void tick() {
@@ -20,6 +22,10 @@ public class BodyPart {
 	public void draw(Graphics g) {
 		g.setColor(Color.PINK);
 		g.fillRect(xCoor * width, yCoor* height, width, height);
+	}
+	
+	public void draw(Graphics g, Image img) {
+		g.drawImage(img, xCoor * width, yCoor * height, this);
 	}
 	
 	public void drawEvil(Graphics g) {
@@ -41,6 +47,12 @@ public class BodyPart {
 	
 	public void setyCoor(int yCoor) {
 		this.yCoor = yCoor;
+	}
+
+	@Override
+	public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
