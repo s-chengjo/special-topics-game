@@ -194,7 +194,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		apples.clear();
 		blocks.clear();
 		ticks = 0;
-		f.setVisible(true);
+		//f.setVisible(true);
 	}
 	
 	public void stop() {

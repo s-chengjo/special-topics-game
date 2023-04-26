@@ -25,7 +25,7 @@ public class BodyPart implements ImageObserver{
 	}
 	
 	public void draw(Graphics g, Image img) {
-		g.drawImage(img, xCoor * width, yCoor * height, this);
+		g.drawImage(img, xCoor * width, yCoor * height-15, this);
 	}
 	
 	public void drawEvil(Graphics g) {
