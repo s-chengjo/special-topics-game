@@ -58,7 +58,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	
 	private int totalTickrate;
 	private Image kirby;
-	
+	private Image deathImg;
+	private Image TitleScreen;
 	
 	
 	//.
@@ -98,6 +99,17 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			e.printStackTrace();
 		}
 		
+		try {
+			deathImg = ImageIO.read(getClass().getResourceAsStream("/resources/adjusted death img.png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			TitleScreen = ImageIO.read(getClass().getResourceAsStream("/resources/title screen thing.png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		
 		totalTickrate = 650000;
@@ -533,9 +545,17 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			myPrintMethod(g);
 		}*/
 		
-		if (running == false) {
+		
+		if (Scores.size() == 0 && running == false)
+		{
 			g.clearRect(0, 0, WIDTH, HEIGHT);
-			g.drawImage(kirby, 0, 0, b);
+			g.drawImage(TitleScreen, 0, 0, null);
+		}
+		
+		if (Scores.size() > 0 && running == false)
+		{
+			g.clearRect(0, 0, WIDTH, HEIGHT);
+			g.drawImage(deathImg, 0, 0, null);
 		}
 		
 		
