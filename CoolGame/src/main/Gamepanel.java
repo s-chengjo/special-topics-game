@@ -60,6 +60,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private Image kirby;
 	private Image deathImg;
 	private Image TitleScreen;
+	private Image blockImg;
 	
 	
 	//.
@@ -106,7 +107,13 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		try {
-			TitleScreen = ImageIO.read(getClass().getResourceAsStream("/resources/title screen thing.png"));
+			TitleScreen = ImageIO.read(getClass().getResourceAsStream("/resources/kirby title screen.png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			blockImg = ImageIO.read(getClass().getResourceAsStream("/resources/newcrate.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -538,7 +545,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		} 
 		
 		for (int i = 0; i < blocks.size(); i++) {
-			blocks.get(i).draw(g);
+			blocks.get(i).drawImg(g, blockImg);
 		}
 		
 		/*if (running == false) {
