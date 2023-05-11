@@ -355,7 +355,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		if (snake2 != null) {
-			if (ticks % totalTickrate*10 == 0) { //every 10 frames
+			if (ticks % (totalTickrate*10) == 0) { //every 10 frame s
 				if (right2 == true) {
 					cannonBall = new EvilBodyPart(xCoor2, yCoor2, 10, "right");
 				} else if (left2 == true) {
