@@ -344,8 +344,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			if(down) yCoor++;
 			if(right2) xCoor2++;
 			if(left2) xCoor2--;
-			if(up2) yCoor2--;
-			if(down2) yCoor2++;
+			if(up2) yCoor2++;
+			if(down2) yCoor2--;
 			
 			
 			b = new BodyPart(xCoor, yCoor, 10);
@@ -648,7 +648,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		
 		if (key == KeyEvent.VK_W && !down2) {
-			up2 = true;
+			down2 = true;
 			right2 = false;
 			left2 = false;
 		}
@@ -666,7 +666,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		if (key == KeyEvent.VK_S && !up2) {
-			down2 = true;
+			up2 = true;
 			left2 = false;
 			right2 = false;
 		}
