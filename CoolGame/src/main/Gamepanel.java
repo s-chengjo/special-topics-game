@@ -376,7 +376,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 					cannonBall = new EvilBodyPart(xCoor2, yCoor2, 10, "left");
 				} else if (up2 == true) {
 					cannonBall = new EvilBodyPart(xCoor2, yCoor2, 10, "up");
-				} else {
+				} else if (down2 == true){
 					cannonBall = new EvilBodyPart(xCoor2, yCoor2, 10, "down");
 				}
 				CannonBall.add(cannonBall);
