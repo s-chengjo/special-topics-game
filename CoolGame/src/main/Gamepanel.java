@@ -61,6 +61,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private Image deathImg;
 	private Image TitleScreen;
 	private Image blockImg;
+	private Image appleImg;
 	
 	
 	//.
@@ -114,6 +115,12 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		try {
 			blockImg = ImageIO.read(getClass().getResourceAsStream("/resources/newcrate.png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			appleImg = ImageIO.read(getClass().getResourceAsStream("/resources/tomato.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -541,7 +548,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		
 		
 		for (int i = 0; i < apples.size(); i++) {
-			apples.get(i).draw(g);
+			apples.get(i).drawImg(g, appleImg);
 		} 
 		
 		for (int i = 0; i < blocks.size(); i++) {
