@@ -4,15 +4,12 @@ import java.awt.image.ImageObserver;
 
 public class BodyPart implements ImageObserver{
 	
-	private int xCoor, yCoor, width, height;
+	private int xCoor, yCoor, tileSize;
 	
 	public BodyPart(int xCoor, int yCoor, int tileSize) {
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
-		width = tileSize;
-		height = tileSize;
-		
-		
+		this.tileSize = tileSize;
 	}
 	
 	public void tick() {
@@ -21,16 +18,16 @@ public class BodyPart implements ImageObserver{
 	
 	public void draw(Graphics g) {
 		g.setColor(Color.PINK);
-		g.fillRect(xCoor * width, yCoor* height, width, height);
+		g.fillRect(xCoor * tileSize, yCoor* tileSize, tileSize, tileSize);
 	}
 	
 	public void draw(Graphics g, Image img) {
-		g.drawImage(img, xCoor * width-10, yCoor * height-15, this);
+		g.drawImage(img, xCoor * tileSize-10, yCoor * tileSize-15, this);
 	}
 	
 	public void drawEvil(Graphics g) {
 		g.setColor(Color.ORANGE);
-		g.fillRect(xCoor * width, yCoor* height, width, height);
+		g.fillRect(xCoor * tileSize, yCoor* tileSize, tileSize, tileSize);
 	}
 	
 	public int getxCoor() {

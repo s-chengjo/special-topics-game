@@ -29,7 +29,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private boolean right2 = true, left2 = false, up2 = false, down2 = false;
 	
 	//Width height and coordinates
-	public static int WIDTH = 0, HEIGHT = 0;
+	public static int WIDTH = 0, HEIGHT = 0, tileSize = 20;
 	private int xCoor = 10, yCoor = 10, size = 5;
 	private int xCoor2 = 10, yCoor2 = 20;
 	private int ticks = 0;
@@ -283,12 +283,12 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		//Set up Snake
 		if (snake.size() == 0)
 		{
-			b = new BodyPart(xCoor, yCoor, 10);
+			b = new BodyPart(xCoor, yCoor, tileSize);
 			snake.add(b);
 		}
 		if (snake2 != null) {
 			if (snake2.size() == 0) {
-				b2 = new BodyPart(xCoor2, yCoor2, 10);
+				b2 = new BodyPart(xCoor2, yCoor2, tileSize);
 				snake2.add(b2);
 			}
 		}
@@ -523,15 +523,15 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		//Draws lines going up (trying to make a grid) the 10 is by how much you want to increment the lines (spacing)
-		for (int i = 0; i < WIDTH/10; i++) 
+		for (int i = 0; i < WIDTH/tileSize; i++) 
 		{
-			g.drawLine(i*10, 0, i*10, HEIGHT);
+			g.drawLine(i*tileSize, 0, i*tileSize, HEIGHT);
 		}
 		
 		//Draws lines going sideways finishing the grid
-		for (int i = 0; i < HEIGHT/10; i++) 
+		for (int i = 0; i < HEIGHT/tileSize; i++) 
 		{
-			g.drawLine(0, i*10, WIDTH, i*10);
+			g.drawLine(0, i*tileSize, WIDTH, i*tileSize);
 		}
 		
 		//Draws Kirby
