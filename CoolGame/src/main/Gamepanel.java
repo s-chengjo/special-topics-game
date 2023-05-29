@@ -62,10 +62,23 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 	private Image TitleScreen;
 	private Image blockImg;
 	private Image appleImg;
+	private Image congratsImg;
 	
 	
 	//.
 	public Gamepanel() {
+		
+		
+		//Setting variables
+		apples = new ArrayList<Apple>();
+		appleRand = new Random();
+		blocks = new ArrayList<Block>();
+		blockRand = new Random();
+		Scores = new ArrayList<Integer>();
+		CannonBall = new ArrayList<EvilBodyPart>();
+		snake = new ArrayList<BodyPart>();
+		invulnerable = false;
+		totalTickrate = 650000;
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("What size screen would you like to play on? (s, m, l)");
@@ -92,8 +105,6 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		addKeyListener(this);
 		
-		snake = new ArrayList<BodyPart>();
-		invulnerable = false;
 		
 		try {
 		kirby = ImageIO.read(getClass().getResourceAsStream("/resources/sprite_00.png"));
@@ -126,7 +137,13 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		}
 		
 		
-		totalTickrate = 650000;
+		try {
+			congratsImg = ImageIO.read(getClass().getResourceAsStream("/resources/tomato.png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		System.out.println("Single player or double? (single, double)");
 		String playerInput = sc.next();
@@ -140,6 +157,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			System.out.println("Invalid input. Please enter either single or double");
 			playerInput = sc.next();
 		}
+		
 		
 		if (snake2 != null) {
 			do {
@@ -165,29 +183,13 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			totalTickrate = 450000;
 		}
 		
-		apples = new ArrayList<Apple>();
-		appleRand = new Random();
-		
-		blocks = new ArrayList<Block>();
-		blockRand = new Random();
 		
 		
-		Scores = new ArrayList<Integer>();
-		
-		CannonBall = new ArrayList<EvilBodyPart>();
-		
-		f = new JFrame("death image");
-		i = new ImageIcon("sprite_00.png");
-		l = new JLabel(i);
-		p = new JPanel();
-		p.add(l);
-		f.add(p);
-		f.setSize(WIDTH, HEIGHT);
 		
 		//start();
 		
 	}
-	//.
+	//
 	public void start() {
 		running = true;
 		thread = new Thread(this);
@@ -220,20 +222,9 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 		apples.clear();
 		blocks.clear();
 		ticks = 0;
-		//f.setVisible(true);
 	}
 	
 	public void stop() {
-		
-		//Exit
-		
-		/*running = false;
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}*/
-		
 		running = false;
 		System.out.println("You scored " + (size*100 - 500) + " points!");
 		Scores.add(size*100 - 500);
@@ -244,6 +235,7 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 				highscore = Scores.get(i);
 			}
 		}
+		
 		
 		System.out.println("Snake is dead now");
 		System.out.println("\nHere are some of your statistics:");
@@ -257,17 +249,17 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			System.out.println("You scored " + highscore + " points??? CONGRAGULATIONS");
 		} else if (highscore > 3000) {
 			//Display congragulations image (poyo!)
+			//g.drawImage(congratsImg, 0, 0, null);
 		}
 		
 		int totalScore = 0;
 		for (int i = 0; i < Scores.size(); i++) {
 			totalScore += Scores.get(i);
 		}
-		
 		System.out.println("\nYour average score was " + (totalScore / Scores.size()) + " points.\n");
 		
-		int lowestScore = Scores.get(0);
 		
+		int lowestScore = Scores.get(0);
 		for (int i = 1; i < Scores.size(); i++) {
 			if (Scores.get(i) < lowestScore) {
 				lowestScore = Scores.get(i);
@@ -279,8 +271,8 @@ public class Gamepanel extends JPanel implements Runnable, KeyListener {
 			System.out.println("\nYour lowest score was " + lowestScore + " points.");
 		}
 		
-		double percentOfHS = (double) lowestScore/highscore * 100;
 		
+		double percentOfHS = (double) lowestScore/highscore * 100;
 		if (percentOfHS == 1) {
 			System.out.println("We hope your single playthrough was fun and exciting!");
 		} else {
